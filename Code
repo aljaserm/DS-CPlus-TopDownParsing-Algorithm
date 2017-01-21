@@ -1,0 +1,223 @@
+#include <iostream>
+#include<string>
+#include<iomanip>
+#include<map>
+using namespace std;
+int selection = 0;
+class top
+{
+public:
+
+	void top::input();
+	void top::search();
+	int top::menu();
+	void top::printTree();
+	void top::print();
+
+private:
+	struct tree
+	{
+		int id;
+		string name;
+		tree *left;
+		tree *right;
+		tree *prev;
+	}topDown[10];
+	string saveName, searchName;
+	int count = -1, compare = 0, searchId, i;
+	char more = 'y';
+	bool found = false;
+	int saveId = 0;
+};
+int main()
+{
+
+	top DS;
+	selection = DS.menu();
+	while (selection != 4)
+	{
+		if (selection == 1)
+		{
+			DS.input();
+			DS.printTree();
+		}
+		else
+			if (selection == 2)
+				DS.search();
+			else
+				if (selection == 3)
+					DS.print();
+		selection = DS.menu();
+	}
+
+	system("pause");
+	return 0;
+}
+
+void top::input()
+{
+
+	for (i = 0; i <= 6; ++i)
+	{
+		count = count + 1;
+
+		cout << setw(5) << "Enter ID: ";
+		cin >> topDown[count].id;
+		cout << setw(5) << "Enter a name: ";
+		cin >> topDown[count].name;
+
+
+
+
+
+	}
+}
+
+int top::menu()
+{
+	cout << "Top-Down Parse Test" << endl << endl;
+	cout << "1.Add Data" << endl;
+	cout << "2.Search Data" << endl;
+	cout << "3.Print" << endl;
+	cout << "4.Exit" << endl;
+	cout << endl;
+	cout << "Please make a selection ";
+	cin >> selection;
+	return selection;
+}
+void top::printTree()
+{
+	system("cls");
+	cout << setw(20) << topDown[0].id << endl;//root
+	cout << setw(19) << "*" << setw(1) << "*" << endl;
+	cout << setw(18) << "*" << setw(3) << "*" << endl;
+	cout << setw(17) << "*" << setw(5) << "*" << endl;
+	cout << setw(16) << "*" << setw(7) << "*" << endl;
+	cout << setw(15) << "*" << setw(9) << "*" << endl;
+	cout << setw(14) << "*" << setw(11) << "*" << endl;
+	cout << setw(13) << "*" << setw(13) << "*" << endl;
+	cout << setw(12) << "*" << setw(15) << "*" << endl;
+	cout << setw(11) << "*" << setw(17) << "*" << endl;
+	cout << setw(10) << "*" << setw(19) << "*" << endl;
+	cout << setw(9) << "*" << setw(21) << "*" << endl;
+	cout << endl;
+	cout << endl;
+	//1st level
+	cout << setw(8) << topDown[1].id << setw(24) << topDown[2].id << endl;
+	cout << endl;
+	cout << setw(8) << "*" << setw(24) << "*" << endl;
+	cout << setw(7) << "*" << setw(2) << "*" << setw(22) << "*" << setw(2) << "*" << endl;
+	cout << setw(6) << "*" << setw(4) << "*" << setw(20) << "*" << setw(4) << "*" << endl;
+	cout << setw(5) << "*" << setw(6) << "*" << setw(18) << "*" << setw(6) << "*" << endl;
+	cout << setw(4) << "*" << setw(8) << "*" << setw(16) << "*" << setw(8) << "*" << endl;
+	//second level right
+	cout << endl;
+	cout << endl;
+
+	cout << setw(4) << topDown[3].id << setw(8) << topDown[4].id << setw(15) <<
+		topDown[5].id << setw(11) << topDown[6].id << endl;
+
+	cout << endl;
+
+
+
+
+
+
+
+	cout << setw(10) << "-------------------------------------------" << endl;
+
+	cout << endl;
+	cout << endl;
+	cout << setw(20) << topDown[0].name << endl;//root
+	cout << endl;
+	cout << endl;
+	//1st level
+	cout << setw(10) << topDown[1].name << setw(17) << topDown[2].name << endl;
+	//second level right
+	cout << endl;
+	cout << endl;
+	cout << setw(5) << topDown[3].name << setw(10) << topDown[4].name << setw(7) <<
+		topDown[5].name << setw(12) << topDown[6].name << endl;
+	system("pause");
+}
+void top::print()
+{
+		cout << "The ID you are looking for is " << saveId << " For " << saveName << endl;
+		cout << "The Number of compirsion until found: " << compare << endl;
+	
+}
+void top::search()
+{
+
+	bool found = false, foundname = false;
+	int pick;
+	compare = 0;
+
+	top::printTree();
+	cout << "Search Options" << endl << endl;
+	cout << "1. Search by ID" << endl;
+	cout << "2.Search by Name" << endl;
+	cin >> pick;
+	if (pick == 1)
+	{
+		cout << "Enter ID to Search: " << endl;
+		cin >> searchId;
+		for (i = 0; i <= 6; ++i)
+		{
+			compare = compare + 1;
+			//	cout << topDown[i].id;
+			if (searchId == topDown[i].id)
+			{
+				saveId = topDown[i].id;
+				saveName = topDown[i].name;
+				found = true;
+			}
+			if (found == true)
+			{
+				cout << "ID found" << endl;
+				break;
+			}
+		
+		}
+		if (found == false)
+		{
+	
+			cout << "ID not found" << endl;
+		
+		}
+
+	}
+	else
+		if (pick == 2)
+		{
+			cout << "Enter Name to Search: " << endl;
+			cin >> searchName;
+			for (i = 0; i <= 6; ++i)
+			{
+				compare = compare + 1;
+				//	cout << topDown[i].id;
+				if (searchName == topDown[i].name)
+				{
+					saveId = topDown[i].id;
+					saveName = topDown[i].name;
+					foundname = true;
+				}
+				if (foundname == true)
+				{
+					cout << "Name Found" << endl;
+					break;
+				}
+			
+			}
+			if (foundname == false)
+			{
+
+				cout << "Name not found" << endl;
+
+			}
+		}
+
+}
+
+
